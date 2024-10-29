@@ -7,7 +7,7 @@ ARG NODE_VERSION=20.11.1
 FROM docker.io/library/debian AS builder
 
 # Define arguments used across multiple stages
-ARG DCAP_VERSION=DCAP_1.21
+ARG DCAP_VERSION=DCAP_1.21_http-support
 ARG NODE_VERSION
 
 # update and install packages, nodejs
@@ -39,7 +39,7 @@ RUN . "$NVM_DIR/nvm.sh" && nvm install $NODE_VERSION && nvm use $NODE_VERSION
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Clone the specific branch or tag 
-RUN git clone --recurse-submodules https://github.com/intel/SGXDataCenterAttestationPrimitives.git -b ${DCAP_VERSION} --depth 1
+RUN git clone --recurse-submodules https://github.com/fortanix/SGXDataCenterAttestationPrimitives.git -b ${DCAP_VERSION} --depth 1
 
 # Build libPCKCertSelection library
 WORKDIR /SGXDataCenterAttestationPrimitives/tools/PCKCertSelection/

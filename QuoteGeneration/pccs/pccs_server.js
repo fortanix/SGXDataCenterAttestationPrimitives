@@ -183,6 +183,14 @@ function startHttpsServer() {
   }
 }
 
+function startHttpServer() {
+    app.listen(Config.get('HTTP_PORT'), Config.get('hosts'), () => {
+      logger.info(`HTTP Server is running on: http://localhost:${Config.get('HTTP_PORT')}`);
+      app.emit('app_started');
+    });
+}
+
+
 function scheduleRefreshJob() {
   node_schedule.scheduleJob(Config.get('RefreshSchedule'), refreshService.scheduledRefresh);
 }
@@ -191,7 +199,11 @@ async function main() {
   await initializeApp();
   configureMiddlewareAndRoutes();
   setCachingMode();
-  startHttpsServer();
+  if (Config.get('HTTPS') == true) {
+    startHttpsServer();
+  } else {
+    startHttpServer();
+  }
   scheduleRefreshJob();
 }
 

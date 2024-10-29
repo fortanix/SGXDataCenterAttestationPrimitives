@@ -1,3 +1,7 @@
+## Note from Fortanix
+
+The code is modified for Fortanix's use cases.
+
 ## Provisioning Certificate Caching Service (PCCS)
 
 This is a lightweight Provisioning Certificate Caching Service implemented in nodejs for reference. It retrieves PCK Certificates and other collaterals on-demand using the internet at runtime, and then caches them in local database. The PCCS exposes similar HTTPS interfaces as Intel's Provisioning Certificate Service.
